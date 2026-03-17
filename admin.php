@@ -312,7 +312,10 @@ if (isset($_SESSION['admin_logged'])) {
                 <?php if (isset($error)) echo "<p style='color:red'>$error</p>"; ?>
                 <form method="POST">
                     <input type="text" name="user" class="form-control" placeholder="Użytkownik" required><br><br>
-                    <input type="password" name="password" class="form-control" placeholder="Hasło" required><br><br>
+                    <div style="position: relative; margin-bottom: 20px;">
+    <input type="password" name="password" id="admin_password" class="form-control" placeholder="Hasło" required style="padding-right: 40px;">
+    <i class="fa-solid fa-eye" id="togglePassword" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #858796;"></i>
+</div><br><br>
                     <button type="submit" name="login_action" class="btn-submit" style="background:var(--primary)">ZALOGUJ SIĘ</button>
                 </form>
             </div>
@@ -430,6 +433,21 @@ if (isset($_SESSION['admin_logged'])) {
             </div>
         </div>
     <?php endif; ?>
+    
+    <script>
+    const togglePassword = document.querySelector('#togglePassword');
+    const password = document.querySelector('#admin_password');
+
+    togglePassword.addEventListener('click', function (e) {
+        // Przełączanie typu pola
+        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+        password.setAttribute('type', type);
+        
+        // Przełączanie ikony
+        this.classList.toggle('fa-eye');
+        this.classList.toggle('fa-eye-slash');
+    });
+</script>
 </body>
 
 </html>
